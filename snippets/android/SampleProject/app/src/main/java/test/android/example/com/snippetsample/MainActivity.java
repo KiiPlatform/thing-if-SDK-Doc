@@ -20,7 +20,14 @@ import com.kii.thing_if.command.ActionResult;
 import com.kii.thing_if.command.AliasAction;
 import com.kii.thing_if.command.Command;
 import com.kii.thing_if.command.CommandForm;
+import com.kii.thing_if.exception.BadRequestException;
+import com.kii.thing_if.exception.ConflictException;
+import com.kii.thing_if.exception.ForbiddenException;
+import com.kii.thing_if.exception.InternalServerErrorException;
+import com.kii.thing_if.exception.NotFoundException;
+import com.kii.thing_if.exception.ServiceUnavailableException;
 import com.kii.thing_if.exception.ThingIFException;
+import com.kii.thing_if.exception.UnregisteredAliasException;
 import com.kii.thing_if.query.AggregatedResult;
 import com.kii.thing_if.query.Aggregation;
 import com.kii.thing_if.query.GroupedHistoryStates;
@@ -78,7 +85,13 @@ public class MainActivity extends AppCompatActivity {
             OnboardWithVendorThingIDOptions options = builder.build();
             try {
                 api.onboardWithVendorThingID(vendorThingID, thingPassword, options);
-            } catch (ThingIFException e) {
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (InternalServerErrorException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -86,14 +99,30 @@ public class MainActivity extends AppCompatActivity {
         // 3. Update thing type
         try {
             api.updateThingType("AirConditioner2");
-        } catch (ThingIFException e) {
+        } catch (BadRequestException e) {
+            // Handle the error.
+        } catch (ForbiddenException e) {
+            // Handle the error.
+        } catch (NotFoundException e) {
+            // Handle the error.
+        } catch (ConflictException e) {
+            // Handle the error.
+        } catch (ServiceUnavailableException e) {
+            // Handle the error.
+        } catch (Exception e) {
             // Handle the error.
         }
 
         // 4. Update firmware version
         try {
             api.updateFirmwareVersion("v2");
-        } catch (ThingIFException e) {
+        } catch (ForbiddenException e) {
+            // Handle the error.
+        } catch (NotFoundException e) {
+            // Handle the error.
+        } catch (ServiceUnavailableException e) {
+            // Handle the error.
+        } catch (Exception e) {
             // Handle the error.
         }
 
@@ -108,7 +137,13 @@ public class MainActivity extends AppCompatActivity {
             CommandForm.Builder builder = CommandForm.Builder.newBuilder(aliases);
             try {
                 api.postNewCommand(builder.build());
-            } catch (ThingIFException e) {
+            } catch (BadRequestException e) {
+                // Handle the error.
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -123,7 +158,13 @@ public class MainActivity extends AppCompatActivity {
                 boolean succeeded = result.isSucceeded();
                 String errorMessage = result.getErrorMessage();
             }
-        } catch (ThingIFException e) {
+        } catch (ForbiddenException e) {
+            // Handle the error.
+        } catch (NotFoundException e) {
+            // Handle the error.
+        } catch (ServiceUnavailableException e) {
+            // Handle the error.
+        } catch (Exception e) {
             // Handle the error.
         }
 
@@ -147,7 +188,13 @@ public class MainActivity extends AppCompatActivity {
                     .build();
             try {
                 Trigger trigger = api.postNewTrigger(form, predicate, options);
-            } catch (ThingIFException e) {
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -164,7 +211,13 @@ public class MainActivity extends AppCompatActivity {
                     .build();
             try {
                 api.patchCommandTrigger(triggerID, null, predicate, options);
-            } catch (ThingIFException e) {
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -181,7 +234,19 @@ public class MainActivity extends AppCompatActivity {
                     // check state.
                 }
                 String nextPaginationKey = result.second;
-            } catch (ThingIFException e) {
+            } catch (UnregisteredAliasException e) {
+                // Handle the error.
+            } catch (BadRequestException e) {
+                // Handle the error.
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (ConflictException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -202,7 +267,19 @@ public class MainActivity extends AppCompatActivity {
                         // check state.
                     }
                 }
-            } catch (ThingIFException e) {
+            } catch (UnregisteredAliasException e) {
+                // Handle the error.
+            } catch (BadRequestException e) {
+                // Handle the error.
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (ConflictException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }
@@ -229,7 +306,19 @@ public class MainActivity extends AppCompatActivity {
                         // check state
                     }
                 }
-            } catch (ThingIFException e) {
+            } catch (UnregisteredAliasException e) {
+                // Handle the error.
+            } catch (BadRequestException e) {
+                // Handle the error.
+            } catch (ForbiddenException e) {
+                // Handle the error.
+            } catch (NotFoundException e) {
+                // Handle the error.
+            } catch (ConflictException e) {
+                // Handle the error.
+            } catch (ServiceUnavailableException e) {
+                // Handle the error.
+            } catch (Exception e) {
                 // Handle the error.
             }
         }

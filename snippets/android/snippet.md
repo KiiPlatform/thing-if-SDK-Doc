@@ -24,7 +24,13 @@ builder.setLayoutPosition(LayoutPosition.STANDALONE);
 OnboardWithVendorThingIDOptions options = builder.build();
 try {
   api.onboardWithVendorThingID(vendorThingID, thingPassword, options);
-} catch (ThingIFException e) {
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (InternalServerErrorException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -33,7 +39,17 @@ try {
 ```java
 try {
   api.updateThingType("dummyThingType");
-} catch (ThingIFException e) {
+} catch (BadRequestException e) {
+  // Handle the error.
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ConflictException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -42,7 +58,13 @@ try {
 ```java
 try {
   api.updateFirmwareVersion("v2");
-} catch (ThingIFException e) {
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -59,7 +81,13 @@ aliases.add(new AliasAction("AirConditionerAlias", actions));
 CommandForm.Builder builder = CommandForm.Builder.newBuilder(aliases);
 try {
   api.postNewCommand(builder.build());
-} catch (ThingIFException e) {
+} catch (BadRequestException e) {
+  // Handle the error.
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -75,7 +103,13 @@ try {
     boolean succeeded = result.isSucceeded();
     String errorMessage = result.getErrorMessage();
   }
-} catch (ThingIFException e) {
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -98,7 +132,13 @@ TriggerOptions options = TriggerOptions.Builder.newBuilder()
   .build();
 try {
   Trigger trigger = api.postNewTrigger(form, predicate, options);
-} catch (ThingIFException e) {
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -115,7 +155,13 @@ TriggerOptions options = TriggerOptions.Builder.newBuilder()
     .build();
 try {
   api.patchCommandTrigger(triggerID, null, predicate, options);
-} catch (ThingIFException e) {
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -133,7 +179,19 @@ try {
     // check state.
   }
   String nextPaginationKey = result.second;
-} catch (ThingIFException e) {
+} catch (UnregisteredAliasException e) {
+  // Handle the error.
+} catch (BadRequestException e) {
+  // Handle the error.
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ConflictException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -154,7 +212,19 @@ try {
       // check state.
     }
   }
-} catch (ThingIFException e) {
+} catch (UnregisteredAliasException e) {
+  // Handle the error.
+} catch (BadRequestException e) {
+  // Handle the error.
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ConflictException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
@@ -181,7 +251,19 @@ try {
       // check state
     }
   }
-} catch (ThingIFException e) {
+} catch (UnregisteredAliasException e) {
+  // Handle the error.
+} catch (BadRequestException e) {
+  // Handle the error.
+} catch (ForbiddenException e) {
+  // Handle the error.
+} catch (NotFoundException e) {
+  // Handle the error.
+} catch (ConflictException e) {
+  // Handle the error.
+} catch (ServiceUnavailableException e) {
+  // Handle the error.
+} catch (Exception e) {
   // Handle the error.
 }
 ```
