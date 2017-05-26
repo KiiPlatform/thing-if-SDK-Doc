@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 2. Execute Onboard
-        try {
+        {
             String vendorThingID = "nbvadgjhcbn";
             String thingPassword = "123456";
             OnboardWithVendorThingIDOptions.Builder builder = new OnboardWithVendorThingIDOptions.Builder();
@@ -76,9 +76,11 @@ public class MainActivity extends AppCompatActivity {
             builder.setThingProperties(new JSONObject());
             builder.setLayoutPosition(LayoutPosition.STANDALONE);
             OnboardWithVendorThingIDOptions options = builder.build();
-            api.onboardWithVendorThingID(vendorThingID, thingPassword, options);
-        } catch (ThingIFException e) {
-            // Handle the error.
+            try {
+                api.onboardWithVendorThingID(vendorThingID, thingPassword, options);
+            } catch (ThingIFException e) {
+                // Handle the error.
+            }
         }
 
         // 3. Update thing type
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 5. Command Operations - Post new Command
-        try {
+        {
             List<Action> actions = new ArrayList<>();
             actions.add(new TurnPower(true));
             actions.add(new SetPresetTemperature(25));
@@ -104,9 +106,11 @@ public class MainActivity extends AppCompatActivity {
             List<AliasAction> aliases = new ArrayList<>();
             aliases.add(new AliasAction("AirConditionerAlias", actions));
             CommandForm.Builder builder = CommandForm.Builder.newBuilder(aliases);
-            api.postNewCommand(builder.build());
-        } catch (ThingIFException e) {
-            // Handle the error.
+            try {
+                api.postNewCommand(builder.build());
+            } catch (ThingIFException e) {
+                // Handle the error.
+            }
         }
 
         // 5. Command Operations - get Command
@@ -176,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 for (HistoryState<AirConditionerState> state : result.first) {
                     // check state.
                 }
+                String nextPaginationKey = result.second;
             } catch (ThingIFException e) {
                 // Handle the error.
             }
@@ -214,8 +219,15 @@ public class MainActivity extends AppCompatActivity {
             try {
                 List<AggregatedResult<Integer, AirConditionerState>> results =
                         api.aggregate(query, aggregate, AirConditionerState.class, Integer.class);
-                for (AggregatedResult result : results) {
-                    // check result
+                for (AggregatedResult<Integer, AirConditionerState> result : results) {
+                    TimeRange range = result.getTimeRange();
+                    if (result.getValue() != null) {
+                        int count = result.getValue();
+                        // check count
+                    }
+                    for (HistoryState<AirConditionerState> state : result.getAggregatedObjects()) {
+                        // check state
+                    }
                 }
             } catch (ThingIFException e) {
                 // Handle the error.
