@@ -8,11 +8,11 @@ putCode() {
   INDENT=""
   cat $SRC | while IFS= read LINE;do
     case `echo $LINE` in
-      "// CodeTagStart: "$TAG)
+      "// CodeTagStart: "$TAG*)
           FLAG=1
           INDENT=${LINE%%/*}
           ;;
-      "// CodeTagEnd: "$TAG) break;;
+      "// CodeTagEnd: "$TAG*) break;;
       *) if [ $FLAG -ne 0 ] ; then
            printf "%s\n" "${LINE#$INDENT}"
          fi;;
@@ -22,7 +22,7 @@ putCode() {
 
 cat base.md | while IFS= read LINE;do
   case $LINE in
-    "#import "*) putCode ${LINE#"#import "};;
+    "// UseCode: "*) putCode ${LINE#"// UseCode: "};;
     *) printf "%s\n" "$LINE";;
   esac
 done

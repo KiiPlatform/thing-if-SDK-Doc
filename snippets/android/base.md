@@ -1,72 +1,72 @@
 1. Create ThingIFAPI(especially for Android) 
 
 ```java
-#import variables
+// UseCode: variables
 
-#import thingIFAPI
+// UseCode: thingIFAPI
 ```
 
 2. Execute Onboard
 
 ```java
-#import onboard
+// UseCode: onboard
 ```
 
 3. Update thing type 
 
 ```java
-#import updateThingType
+// UseCode: updateThingType
 ```
 
 4. Update firmware version 
 
 ```java
-#import updateFirmwareVersion
+// UseCode: updateFirmwareVersion
 ```
 
 5. Command Operations
   - Post new Command (create alias action)
 
 ```java
-#import postNewCommand
+// UseCode: postNewCommand
 ```
 
   - get Command (handle action result) 
 
 ```java
-#import getCommand
+// UseCode: getCommand
 ```
 
 6. Trigger Operations
   - post command trigger(state predicate)
 
 ```java
-#import postNewTrigger
+// UseCode: postNewTrigger
 ```
 
   - patch command trigger(state predicate)
 
 ```java
-#import patchTrigger
+// UseCode: patchTrigger
 ```
 
 7. Query thing states
   - ungrouped query
 
 ```java
-#import ungroupedQuery
+// UseCode: ungroupedQuery
 ```
 
   - grouped query
 
 ```java
-#import groupedQuery
+// UseCode: groupedQuery
 ```
 
   - aggregate
 
 ```java
-#import aggregate
+// UseCode: aggregate
 ```
 
 
