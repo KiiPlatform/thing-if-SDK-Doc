@@ -5,23 +5,24 @@ SRC=SampleProject/app/src/main/java/test/android/example/com/snippetsample/MainA
 FLAG=0
 INDENT=""
 while IFS= read LINE;do
-  case `echo $LINE` in
+  STR=${LINE%"\r"}
+  case `echo $STR` in
     "// CodeTagStart: "*)
         FLAG=1
-        INDENT=${LINE%%/*}
-        TAG=${LINE#*"// CodeTagStart: "}
-        printf "export %s=(" $TAG
+        INDENT=${STR%%/*}
+        TAG=${STR#*"// CodeTagStart: "}
+        ARRAY="("
         ;;
     "// CodeTagEnd: "*)
-        printf ")\n"
+        ARRAY+=" )"
         FLAG=0
+        declare -a -x $TAG="${ARRAY}"
         ;;
     *) if [ $FLAG -ne 0 ] ; then
-         printf " '%s'" "${LINE#$INDENT}"
+         ARRAY+=" '${STR#$INDENT}'"
        fi;;
   esac
-done < $SRC > src.data
+done < $SRC
 
-tr -d '\r' < src.data > src2.data
-mo --source=src2.data base.md
-rm src.data src2.data
+. mo
+mo base.md
