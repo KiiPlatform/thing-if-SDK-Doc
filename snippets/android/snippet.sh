@@ -5,7 +5,7 @@ SRC=SampleProject/app/src/main/java/test/android/example/com/snippetsample/MainA
 FLAG=0
 INDENT=""
 while IFS= read LINE;do
-  STR=${LINE%"\r"}
+  STR=${LINE%""}
   case `echo $STR` in
     "// CodeTagStart: "*)
         FLAG=1
