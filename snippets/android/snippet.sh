@@ -24,3 +24,4 @@ done < $SRC > src.data
 
 tr -d '\r' < src.data > src2.data
 mo --source=src2.data base.md
+rm src.data src2.data
