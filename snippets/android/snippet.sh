@@ -22,4 +22,5 @@ while IFS= read LINE;do
   esac
 done < $SRC > src.data
 
-mo --source=src.data base.md
+tr -d '\r' < src.data > src2.data
+mo --source=src2.data base.md
