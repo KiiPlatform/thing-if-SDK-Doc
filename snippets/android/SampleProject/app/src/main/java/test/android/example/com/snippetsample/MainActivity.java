@@ -61,20 +61,25 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onClick(View view) {
         Owner owner = new Owner(new TypedID(TypedID.Types.THING, "dummyID"), "dummyToken");
+        // CodeTagStart: variables
         ThingIFAPI api;
+        // CodeTagEnd: variables
 
         // 1. Create ThingIFAPI
         {
+            // CodeTagStart: thingIFAPI
             KiiApp app = new KiiApp("___APPID___", "___APPKEY___", Site.JP);
             ThingIFAPI.Builder builder = ThingIFAPI.Builder.newBuilder(getApplicationContext(), app, owner);
             builder.registerAction("AirConditionerAlias", "turnPower", TurnPower.class);
             builder.registerAction("AirConditionerAlias", "setPresetTemperature", SetPresetTemperature.class);
             builder.registerAction("AirConditionerAlias", "setFanSpeed", SetFanSpeed.class);
             api = builder.build();
+            // CodeTagEnd: thingIFAPI
         }
 
         // 2. Execute Onboard
         {
+            // CodeTagStart: onboard
             String vendorThingID = "nbvadgjhcbn";
             String thingPassword = "123456";
             OnboardWithVendorThingIDOptions.Builder builder = new OnboardWithVendorThingIDOptions.Builder();
@@ -94,9 +99,11 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: onboard
         }
 
         // 3. Update thing type
+        // CodeTagStart: updateThingType
         try {
             api.updateThingType("AirConditioner2");
         } catch (BadRequestException e) {
@@ -112,8 +119,10 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             // Handle the error.
         }
+        // CodeTagEnd: updateThingType
 
         // 4. Update firmware version
+        // CodeTagStart: updateFirmwareVersion
         try {
             api.updateFirmwareVersion("v2");
         } catch (ForbiddenException e) {
@@ -125,9 +134,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             // Handle the error.
         }
+        // CodeTagEnd: updateFirmwareVersion
 
         // 5. Command Operations - Post new Command
         {
+            // CodeTagStart: postNewCommand
             List<Action> actions = new ArrayList<>();
             actions.add(new TurnPower(true));
             actions.add(new SetPresetTemperature(25));
@@ -146,9 +157,11 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: postNewCommand
         }
 
         // 5. Command Operations - get Command
+        // CodeTagStart: getCommand
         try {
             Command command = api.getCommand("commandID");
             List<ActionResult> results = command.getActionResult("AirConditionerAlias", "turnPower");
@@ -167,9 +180,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             // Handle the error.
         }
+        // CodeTagEnd: getCommand
 
         // 6. Trigger Operations - post command trigger
         {
+            // CodeTagStart: postNewTrigger
             List<Action> actions = new ArrayList<>();
             actions.add(new TurnPower(true));
             actions.add(new SetPresetTemperature(25));
@@ -197,10 +212,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: postNewTrigger
         }
 
         // 6. Trigger Operations - patch command trigger
         {
+            // CodeTagStart: patchTrigger
             String triggerID = "{get trigger id from Trigger instance}";
             Condition condition = new Condition(
                     RangeClauseInTrigger.greaterThanOrEqualTo("AirConditionerAlias", "currentTemperature", 28));
@@ -220,10 +237,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: patchTrigger
         }
 
         // 7. Query thing states - ungrouped query
         {
+            // CodeTagStart: ungroupedQuery
             HistoryStatesQuery query = HistoryStatesQuery.Builder
                     .newBuilder("AirConditionerAlias", new AllClause())
                     .build();
@@ -249,10 +268,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: ungroupedQuery
         }
 
         // 7. Query thing states - grouped query
         {
+            // CodeTagStart: groupedQuery
             TimeRange timeRange = new TimeRange(new Date(), new Date());
             GroupedHistoryStatesQuery query = GroupedHistoryStatesQuery.Builder
                     .newBuilder("AirConditionerAlias", timeRange)
@@ -282,10 +303,12 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: groupedQuery
         }
 
         // 7. Query thing states - aggregate
         {
+            // CodeTagStart: aggregate
             TimeRange timeRange = new TimeRange(new Date(), new Date());
             GroupedHistoryStatesQuery query = GroupedHistoryStatesQuery.Builder
                     .newBuilder("AirConditionerAlias", timeRange)
@@ -321,6 +344,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // Handle the error.
             }
+            // CodeTagEnd: aggregate
         }
     }
 }
