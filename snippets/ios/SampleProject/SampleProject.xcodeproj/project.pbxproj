@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222473661EE127C100774E7F /* Pods_SampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222473651EE127C100774E7F /* Pods_SampleProject.framework */; };
 		2237A7421EDFFB8600263607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237A7411EDFFB8600263607 /* AppDelegate.swift */; };
 		2237A7441EDFFB8600263607 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2237A7431EDFFB8600263607 /* ViewController.swift */; };
 		2237A7471EDFFB8600263607 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2237A7451EDFFB8600263607 /* Main.storyboard */; };
 		2237A7491EDFFB8600263607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2237A7481EDFFB8600263607 /* Assets.xcassets */; };
 		2237A74C1EDFFB8600263607 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2237A74A1EDFFB8600263607 /* LaunchScreen.storyboard */; };
 		2237A7541EE0100F00263607 /* ThingIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2237A7531EE0100F00263607 /* ThingIF.framework */; };
-		E9049EB2DFEC5F03B9F184B7 /* Pods_SampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8DB7742D6B8A405E77C77B /* Pods_SampleProject.framework */; };
+		9661411F1E9D0518DA27A65E /* Pods_SampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8DB7742D6B8A405E77C77B /* Pods_SampleProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0724AFC59FFBF30D7A1F3F6A /* Pods-SampleProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleProject/Pods-SampleProject.debug.xcconfig"; sourceTree = "<group>"; };
+		222473651EE127C100774E7F /* Pods_SampleProject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_SampleProject.framework; path = "Pods/../build/Release-iphoneos/Pods_SampleProject.framework"; sourceTree = "<group>"; };
 		2237A73E1EDFFB8600263607 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2237A7411EDFFB8600263607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2237A7431EDFFB8600263607 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,8 +37,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222473661EE127C100774E7F /* Pods_SampleProject.framework in Frameworks */,
 				2237A7541EE0100F00263607 /* ThingIF.framework in Frameworks */,
-				E9049EB2DFEC5F03B9F184B7 /* Pods_SampleProject.framework in Frameworks */,
+				9661411F1E9D0518DA27A65E /* Pods_SampleProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 		0074D905382111E2511F6EED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				222473651EE127C100774E7F /* Pods_SampleProject.framework */,
 				2237A7531EE0100F00263607 /* ThingIF.framework */,
 				FF8DB7742D6B8A405E77C77B /* Pods_SampleProject.framework */,
 			);
@@ -344,6 +348,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				INFOPLIST_FILE = SampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -361,6 +366,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
 				);
 				INFOPLIST_FILE = SampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
