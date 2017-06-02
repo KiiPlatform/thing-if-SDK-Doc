@@ -17,9 +17,21 @@ func check(e error) {
 	}
 }
 
-var tagReg = regexp.MustCompile(`( +)\/\/ CodeTag(Start|End): (.+)`)
-var tagMap map[string]string
+// pattern of source file can be "foo/bar/*.java", "foo/*/*.java"
+var srcReg = regexp.MustCompile(`(([^\*]+\/)*)(.+)`)
+var matchPattern string
+var foundSrcFiles []string
 
+// search files describe with file pattern in .source
+func searchSrcFile(path string, f os.FileInfo, err error) error {
+	matched, _ := filepath.Match(matchPattern, path)
+	if matched {
+		foundSrcFiles = append(foundSrcFiles, path)
+	}
+	return nil
+}
+
+// parse .source to get file pattern one by one
 func parseSourceListFile(file File) error {
 	f, _ := os.Open(file.FullName)
 	defer f.Close()
@@ -27,17 +39,34 @@ func parseSourceListFile(file File) error {
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		aLine := scanner.Text()
-		srcFile := file.Path + aLine
-		if _, err := os.Stat(srcFile); os.IsNotExist(err) {
-			return errors.New("srce file name: " + aLine + " described in " + file.FullName + " does not exists")
+		m := srcReg.FindStringSubmatch(aLine)
+		if len(m) == 0 {
+			continue
 		}
-		if err := parseSource(srcFile); err != nil {
+		subPath := m[2]
+		matchPattern = file.Path + aLine
+		pathToSearch := file.Path + subPath
+		// empty array
+		foundSrcFiles = []string{}
+		err := filepath.Walk(pathToSearch, searchSrcFile)
+		if err != nil {
+			fmt.Printf("filepath.Walk() returned %v\n", err)
 			return err
+		}
+		for _, srcFile := range foundSrcFiles {
+			if err := parseSource(srcFile); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
 }
 
+// pattern of snippet tag
+var tagReg = regexp.MustCompile(`( +)\/\/ CodeTag(Start|End): (.+)`)
+var tagMap map[string]string
+
+// parse source file to get code tags and snippets
 func parseSource(source string) error {
 	srcFile, _ := os.Open(source)
 	defer srcFile.Close()
@@ -76,6 +105,7 @@ func parseSource(source string) error {
 	return nil
 }
 
+// create document with templetate
 func createDoc(out, tmpl string) error {
 
 	// expand template.
@@ -94,7 +124,10 @@ func createDoc(out, tmpl string) error {
 	return nil
 }
 
-var srcReg = regexp.MustCompile(`((.+\/)*)\.source`)
+// pattern of full path of .source
+var srcListReg = regexp.MustCompile(`((.+\/)*)\.source`)
+
+// pattern of full path of .tmpl templetate file
 var tmpleReg = regexp.MustCompile(`((.+\/)*)(.+)\.tmpl`)
 
 type File struct {
@@ -112,7 +145,7 @@ var srcFiles []File
 var dFiles []Document
 
 func searchFile(path string, f os.FileInfo, err error) error {
-	m1 := srcReg.FindStringSubmatch(path)
+	m1 := srcListReg.FindStringSubmatch(path)
 	m2 := tmpleReg.FindStringSubmatch(path)
 	if len(m1) != 0 {
 		fmt.Printf("found source file, path: %s\n", m1[2])
@@ -141,15 +174,15 @@ func searchFile(path string, f os.FileInfo, err error) error {
 	return nil
 }
 
-func main() {
+func autoGenerate(root string) {
 	// initialization
 	tagMap = map[string]string{}
-	err := filepath.Walk(".", searchFile)
+	err := filepath.Walk(root, searchFile)
 	if err != nil {
 		fmt.Printf("filepath.Walk() returned %v\n", err)
 	}
 
-	// parse source file
+	// parse .source files
 	for _, srcFile := range srcFiles {
 		if err = parseSourceListFile(srcFile); err != nil {
 			fmt.Printf("err: %s", err)
@@ -157,11 +190,15 @@ func main() {
 		}
 	}
 
-	// generate document
+	// generate document with .tmpl files
 	for _, doc := range dFiles {
 		docFile := doc.RstFile.Path + doc.RstFile.Name
 		if err = createDoc(docFile, doc.TmplFile.FullName); err != nil {
 			fmt.Printf("faild to create %s, err: %s", docFile, err)
 		}
 	}
+}
+
+func main() {
+	autoGenerate("snippets")
 }
