@@ -1,4 +1,4 @@
-1. Create ThingIFAPI(especially for Android) 
+1. Create ThingIFAPI(especially for Android)
 
 ```java
 ThingIFAPI api;
@@ -35,7 +35,7 @@ try {
 }
 ```
 
-3. Update thing type 
+3. Update thing type
 
 ```java
 try {
@@ -55,7 +55,7 @@ try {
 }
 ```
 
-4. Update firmware version 
+4. Update firmware version
 
 ```java
 try {
@@ -95,7 +95,7 @@ try {
 }
 ```
 
-  - get Command (handle action result) 
+  - get Command (handle action result)
 
 ```java
 try {
