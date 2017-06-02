@@ -2,7 +2,6 @@
 //  AppDelegate.swift
 //  SampleProject
 //
-//  Created by 秋元 直樹 on 2017/06/01.
 //
 //
 
