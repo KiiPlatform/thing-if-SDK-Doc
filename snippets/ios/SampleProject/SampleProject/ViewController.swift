@@ -14,18 +14,18 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         let owner = Owner(TypedID(.thing, id: "dummyID"), accessToken: "dummyToken")
-        // CodeTagStart: variables
-        // CodeTagEnd: variables
+        // CodeTagStart: variables_ios
+        // CodeTagEnd: variables_ios
 
         // 1. Create ThingIFAPI
-        // CodeTagStart: thingIFAPI
+        // CodeTagStart: thingIFAPI_ios
         let app = KiiApp("___APPID___", appKey: "___APPKEY___", site: .jp)
         let api = ThingIFAPI(app, owner: owner)
-        // CodeTagEnd: thingIFAPI
+        // CodeTagEnd: thingIFAPI_ios
 
         // 2. Execute Onboard
         do {
-            // CodeTagStart: onboard
+            // CodeTagStart: onboard_ios
             let vendorThingID = "nbvadgjhcbn"
             let thingPassword = "123456"
             let thingType = "AirConditioner"
@@ -60,10 +60,10 @@ class ViewController: UIViewController {
                         }
                     }
             }
-            // CodeTagEnd: onboard
+            // CodeTagEnd: onboard_ios
         }
 
-        // CodeTagStart: updateThingType
+        // CodeTagStart: updateThingType_ios
         api.update(thingType: "AirConditioner2") { (error) in
             if error != nil {
                 switch error! {
@@ -93,9 +93,9 @@ class ViewController: UIViewController {
                 }
             }
         }
-        // CodeTagEnd: updateThingType
+        // CodeTagEnd: updateThingType_ios
 
-        // CodeTagStart: updateFirmwareVersion
+        // CodeTagStart: updateFirmwareVersion_ios
         api.update(firmwareVersion: "v2") { (error) in
             if error != nil {
                 switch error! {
@@ -119,10 +119,10 @@ class ViewController: UIViewController {
                 }
             }
         }
-        // CodeTagEnd: updateFirmwareVersion
+        // CodeTagEnd: updateFirmwareVersion_ios
 
         do {
-            // CodeTagStart: postNewCommand
+            // CodeTagStart: postNewCommand_ios
             let form = CommandForm([
                 AliasAction(
                     "AirConditionerAlias",
@@ -155,10 +155,10 @@ class ViewController: UIViewController {
                     }
                 }
             }
-            // CodeTagEnd: postNewCommand
+            // CodeTagEnd: postNewCommand_ios
         }
 
-        // CodeTagStart: getCommand
+        // CodeTagStart: getCommand_ios
         api.getCommand("commandID") { (command, error) in
             if error != nil {
                 switch error! {
@@ -190,10 +190,10 @@ class ViewController: UIViewController {
                 }
             }
         }
-        // CodeTagEnd: getCommand
+        // CodeTagEnd: getCommand_ios
 
         do {
-            // CodeTagStart: postNewTrigger
+            // CodeTagStart: postNewTrigger_ios
             let form = TriggeredCommandForm([
                 AliasAction(
                     "AirConditionerAlias",
@@ -238,11 +238,11 @@ class ViewController: UIViewController {
                     // check trigger.
                 }
             }
-            // CodeTagEnd: postNewTrigger
+            // CodeTagEnd: postNewTrigger_ios
         }
 
         do {
-            // CodeTagStart: patchTrigger
+            // CodeTagStart: patchTrigger_ios
             let triggerId = "{get trigger id from Trigger instance}"
             let predicate = StatePredicate(
                 Condition(
@@ -279,11 +279,11 @@ class ViewController: UIViewController {
                     // check trigger.
                 }
             }
-            // CodeTagEnd: patchTrigger
+            // CodeTagEnd: patchTrigger_ios
         }
 
         do {
-            // CodeTagStart: ungroupedQuery
+            // CodeTagStart: ungroupedQuery_ios
             let query = HistoryStatesQuery("AirConditionerAlias", clause: AllClause())
             api.query(query) { (states, nextPaginationKey, error) in
                 if error != nil {
@@ -318,11 +318,11 @@ class ViewController: UIViewController {
                     }
                 }
             }
-            // CodeTagEnd: ungroupedQuery
+            // CodeTagEnd: ungroupedQuery_ios
         }
 
         do {
-            // CodeTagStart: groupedQuery
+            // CodeTagStart: groupedQuery_ios
             let query = GroupedHistoryStatesQuery(
                 "AirConditionerAlias",
                 timeRange: TimeRange(Date(), to: Date()),
@@ -360,11 +360,11 @@ class ViewController: UIViewController {
                     }
                 }
             }
-            // CodeTagEnd: groupedQuery
+            // CodeTagEnd: groupedQuery_ios
         }
 
         do {
-            // CodeTagStart: aggregate
+            // CodeTagStart: aggregate_ios
             let query = GroupedHistoryStatesQuery(
                 "AirConditionerAlias",
                 timeRange: TimeRange(Date(), to: Date()),
@@ -403,7 +403,7 @@ class ViewController: UIViewController {
                     }
                 }
             }
-            // CodeTagEnd: aggregate
+            // CodeTagEnd: aggregate_ios
         }
     }
 
