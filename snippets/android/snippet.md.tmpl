@@ -1,0 +1,72 @@
+1. Create ThingIFAPI(especially for Android)
+
+```java
+{{.variables}}
+
+{{.thingIFAPI}}
+```
+
+2. Execute Onboard
+
+```java
+{{.onboard}}
+```
+
+3. Update thing type
+
+```java
+{{.updateThingType}}
+```
+
+4. Update firmware version
+
+```java
+{{.updateFirmwareVersion}}
+```
+
+5. Command Operations
+  - Post new Command (create alias action)
+
+```java
+{{.postNewCommand}}
+```
+
+  - get Command (handle action result)
+
+```java
+{{.getCommand}}
+```
+
+6. Trigger Operations
+  - post command trigger(state predicate)
+
+```java
+{{.postNewTrigger}}
+```
+
+  - patch command trigger(state predicate)
+
+```java
+{{.patchTrigger}}
+```
+
+7. Query thing states
+  - ungrouped query
+
+```java
+{{.ungroupedQuery}}
+```
+
+  - grouped query
+
+```java
+{{.groupedQuery}}
+```
+
+  - aggregate
+
+```java
+{{.aggregate}}
+```
+
+
