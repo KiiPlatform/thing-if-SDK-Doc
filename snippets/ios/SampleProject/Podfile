@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'SampleProject' do
+  pod 'KiiCloud'
+
+end
