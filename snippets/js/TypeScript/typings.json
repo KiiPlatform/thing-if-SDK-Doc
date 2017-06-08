@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "thing-if": "npm:thing-if"
+  }
+}
