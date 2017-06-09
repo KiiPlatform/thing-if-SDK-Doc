@@ -17,7 +17,7 @@ const onboardRequest = new ThingIF.OnboardWithVendorThingIDRequest(
   owner,
   "AirConditioner",
   "v1",
-  null,
+  undefined,
   ThingIF.LayoutPosition.STANDALONE);
 api.onboardWithVendorThingID(onboardRequest)
   .then((result: ThingIF.OnboardingResult) => {
@@ -213,7 +213,7 @@ const patchPredicate = new ThingIF.StatePredicate(
       "AirConditionerAlias", "currentTemperature", 28)),
   ThingIF.TriggersWhen.CONDITION_FALSE_TO_TRUE
 );
-const patchTriggerRequest = new ThingIF.PostCommandTriggerRequest(null, patchPredicate);
+const patchTriggerRequest = new ThingIF.PostCommandTriggerRequest(triggerCommand, patchPredicate);
 api.patchCommandTrigger(triggerID, patchTriggerRequest)
   .then((trigger: ThingIF.Trigger) => {
     // check trigger.
