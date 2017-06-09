@@ -105,59 +105,59 @@ var commandRequest = new ThingIF.PostCommandRequest([
 ]);
 api.postNewCommand(commandRequest)
     .then(function (command) {
-    // Do something.
-}).catch(function (error) {
-    if (error instanceof ThingIF.HttpRequestError) {
-        switch (error.status) {
-            case 400:
-                // Handle the error.
-                break;
-            case 403:
-                // Handle the error.
-                break;
-            case 503:
-                // Handle the error.
-                break;
-            default:
-                // Handle the error.
-                break;
+        // Do something.
+    }).catch(function (error) {
+        if (error instanceof ThingIF.HttpRequestError) {
+            switch (error.status) {
+                case 400:
+                    // Handle the error.
+                    break;
+                case 403:
+                    // Handle the error.
+                    break;
+                case 503:
+                    // Handle the error.
+                    break;
+                default:
+                    // Handle the error.
+                    break;
+            }
         }
-    }
-});
+    });
 // CodeTagEnd: postNewCommand_js
 
 // CodeTagStart: getCommand_js
 api.getCommand("commandID")
     .then(function (command) {
-    var aliasActionResults = command.getAliasActionResults("AirConditionerAlias");
-    for (var _i = 0, aliasActionResults_1 = aliasActionResults; _i < aliasActionResults_1.length; _i++) {
-        var aliasActionResult = aliasActionResults_1[_i];
-        for (var _a = 0, _b = aliasActionResult.getActionResults("turnPower"); _a < _b.length; _a++) {
-            var actionResult = _b[_a];
-            var actionName = actionResult.actionName;
-            var succeeded = actionResult.succeeded;
-            var data = actionResult.data;
-            var errorMessage = actionResult.errorMessage;
+        var aliasActionResults = command.getAliasActionResults("AirConditionerAlias");
+        for (var _i = 0, aliasActionResults_1 = aliasActionResults; _i < aliasActionResults_1.length; _i++) {
+            var aliasActionResult = aliasActionResults_1[_i];
+            for (var _a = 0, _b = aliasActionResult.getActionResults("turnPower"); _a < _b.length; _a++) {
+                var actionResult = _b[_a];
+                var actionName = actionResult.actionName;
+                var succeeded = actionResult.succeeded;
+                var data = actionResult.data;
+                var errorMessage = actionResult.errorMessage;
+            }
         }
-    }
-}).catch(function (error) {
-    if (error instanceof ThingIF.HttpRequestError) {
-        switch (error.status) {
-            case 403:
-                // Handle the error.
-                break;
-            case 404:
-                // Handle the error.
-                break;
-            case 503:
-                // Handle the error.
-                break;
-            default:
-                // Handle the error.
-                break;
+    }).catch(function (error) {
+        if (error instanceof ThingIF.HttpRequestError) {
+            switch (error.status) {
+                case 403:
+                    // Handle the error.
+                    break;
+                case 404:
+                    // Handle the error.
+                    break;
+                case 503:
+                    // Handle the error.
+                    break;
+                default:
+                    // Handle the error.
+                    break;
+            }
         }
-    }
-});
+    });
 // CodeTagEnd: getCommand_js
 
 // CodeTagStart: postNewTrigger_js
@@ -213,25 +213,25 @@ var patchPredicate = new ThingIF.StatePredicate(
 var patchTriggerRequest = new ThingIF.PostCommandTriggerRequest(null, patchPredicate);
 api.patchCommandTrigger(triggerID, patchTriggerRequest)
     .then(function (trigger) {
-    // check trigger.
-}).catch(function (error) {
-    if (error instanceof ThingIF.HttpRequestError) {
-        switch (error.status) {
-            case 403:
-                // Handle the error.
-                break;
-            case 404:
-                // Handle the error.
-                break;
-            case 503:
-                // Handle the error.
-                break;
-            default:
-                // Handle the error.
-                break;
+        // check trigger.
+    }).catch(function (error) {
+        if (error instanceof ThingIF.HttpRequestError) {
+            switch (error.status) {
+                case 403:
+                    // Handle the error.
+                    break;
+                case 404:
+                    // Handle the error.
+                    break;
+                case 503:
+                    // Handle the error.
+                    break;
+                default:
+                    // Handle the error.
+                    break;
+            }
         }
-    }
-});
+    });
 // CodeTagEnd: patchTrigger_js
 
 // CodeTagStart: ungroupedQuery_js
