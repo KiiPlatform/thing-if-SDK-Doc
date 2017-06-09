@@ -17,7 +17,7 @@ const onboardRequest = new ThingIF.OnboardWithVendorThingIDRequest(
   owner,
   "AirConditioner",
   "v1",
-  undefined,
+  null,
   ThingIF.LayoutPosition.STANDALONE);
 api.onboardWithVendorThingID(onboardRequest)
   .then((result: ThingIF.OnboardingResult) => {
@@ -96,12 +96,14 @@ api.updateFirmwareVersion("v2")
 
 // CodeTagStart: postNewCommand_ts
 const commandRequest = new ThingIF.PostCommandRequest([
-  new ThingIF.AliasAction("AirConditionerAlias",
-  [
-    new ThingIF.Action("turnPower", true),
-    new ThingIF.Action("setPresetTemperature", 25),
-    new ThingIF.Action("setFanSpeed", 5)
-  ])
+  new ThingIF.AliasAction(
+    "AirConditionerAlias",
+    [
+      new ThingIF.Action("turnPower", true),
+      new ThingIF.Action("setPresetTemperature", 25),
+      new ThingIF.Action("setFanSpeed", 5)
+    ]
+  )
 ]);
 api.postNewCommand(commandRequest)
   .then((command: ThingIF.Command) => {
@@ -171,8 +173,7 @@ const triggerCommand = new ThingIF.TriggerCommandObject(
       ])
   ],
   new ThingIF.TypedID(ThingIF.Types.Thing, "th.01234-abcde"),
-  owner
-);
+  owner);
 const postPredicate = new ThingIF.StatePredicate(
   new ThingIF.Condition(
     ThingIF.RangeClauseInTrigger.greaterThanEquals(
