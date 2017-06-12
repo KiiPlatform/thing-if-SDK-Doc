@@ -63,7 +63,7 @@ func parseSourceListFile(file File) error {
 }
 
 // pattern of snippet tag
-var tagReg = regexp.MustCompile(`( +)\/\/ CodeTag(Start|End): (.+)`)
+var tagReg = regexp.MustCompile(`( *)\/\/ CodeTag(Start|End): (.+)`)
 var tagMap map[string]string
 
 // parse source file to get code tags and snippets
