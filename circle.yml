@@ -1,0 +1,40 @@
+machine:
+  environment:
+    ANDROID_HOME: "${HOME}/android-sdk"
+    PATH: "${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin"
+  xcode:
+    version: 8.2
+dependencies:
+  cache_directories:
+    - ~/android-sdk
+  pre:
+    - env
+    - go version
+    - go env
+    - npm install js-beautify -g
+    - npm install typescript -g
+    - npm install typings -g
+    - mkdir -p ${ANDROID_HOME}
+    - (curl -o ~/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-darwin-3859397.zip && unzip -d ${ANDROID_HOME} ~/android-sdk.zip) && (( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | yes | sdkmanager "build-tools;25.0.0" | yes | sdkmanager "platforms;android-25")
+    - brew update
+    - brew install gradle
+  override:
+    # go code
+    - mkdir -p ~/.go_project/src/github.com/${CIRCLE_PROJECT_USERNAME}
+    - ln -s ${HOME}/${CIRCLE_PROJECT_REPONAME} ${HOME}/.go_project/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
+    - go get -t -d -v ./...
+    # js
+    - "cd snippets/js/; npm install thing-if; sh generate_js.sh"
+    # android
+    - "cd snippets/android/SampleProject; gradle :app:build"
+    # ios
+    - "cd snippets/ios/SampleProject; pod install; carthage update; xcodebuild -workspace SampleProject.xcworkspace -list ;xcodebuild -workspace SampleProject.xcworkspace -scheme SampleProject  -sdk iphonesimulator clean build"
+  post:
+    - go run auto-generator.go
+    - cp snippets/js/snippet.md $CIRCLE_ARTIFACTS/js-snippet.md
+    - cp snippets/android/snippet.md $CIRCLE_ARTIFACTS/android-snippet.md
+    - cp snippets/ios/snippet.md $CIRCLE_ARTIFACTS/ios-snippet.md
+
+test:
+  override:
+      - echo "skip test"
